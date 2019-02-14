@@ -1,0 +1,9 @@
+<div class="user-list">
+    <mat-action-list>
+      <ng-container *ngFor="let user of users$ | async">
+          <a mat-list-item [routerLink]="['/users', user.payload.doc.id]">
+            {{ user.payload.doc.data().name }}
+          </a>
+      </ng-container>
+    </mat-action-list>
+</div>

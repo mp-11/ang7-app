@@ -1,0 +1,16 @@
+<div *ngIf="!(auth.user | async); else alreadyLoggedIn">
+      <app-user-form></app-user-form>
+      <hr>
+      <button (click)="signInWithGoogle()" mat-raised-button>
+          Connect Google
+      </button> <br><br>
+      <button (click)="signInAnonymously()" mat-raised-button>
+          Connect Anonymously
+      </button>
+  </div>
+  
+  <ng-template #alreadyLoggedIn>
+    <p class="text-success">
+      You are logged in
+    </p>
+  </ng-template>

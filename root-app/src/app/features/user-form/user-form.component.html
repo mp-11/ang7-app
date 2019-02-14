@@ -1,0 +1,54 @@
+<form [formGroup]="userForm" *ngIf="newUser" (ngSubmit)="signup()">
+    <h3>New User Signup</h3>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control"  formControlName="email" name="email" required autocomplete="new-password">
+    
+        <div *ngIf="formErrors.email" class="notification is-danger">
+            {{ formErrors.email }}
+        </div>
+        <div *ngIf="userForm.get('email').status === 'PENDING'">
+            Checking...
+          </div>
+          <div *ngIf="userForm.get('email').errors && userForm.get('email').errors.emailTaken">
+            😢 Oh noes, this email is already taken!
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control"  formControlName="password" name="password" required autocomplete="new-password">
+    
+        <div *ngIf="formErrors.password" class="notification is-danger">
+            {{ formErrors.password }}
+        </div>
+    </div>
+
+    <button type="submit" mat-raised-button color='primary' [disabled]="!userForm.valid">Submit</button>
+    <button mat-button (click)="toggleForm()">Already Registered?</button>
+</form>
+
+<form [formGroup]="userForm" *ngIf="!newUser" (ngSubmit)="login()">
+    <h3>Existing User Login</h3>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" name="email2" formControlName="email" required>
+    
+        <div *ngIf="formErrors.email" class="help is-danger">
+            {{ formErrors.email }}
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password2" formControlName="password" required>
+    
+        <div *ngIf="formErrors.password" class="help is-danger">
+            {{ formErrors.password }}
+        </div>
+    </div>
+    
+    <button type="submit" mat-raised-button color='primary' [disabled]="!userForm.valid">Submit</button>
+    <button mat-button (click)="toggleForm()">New User?</button>
+</form>

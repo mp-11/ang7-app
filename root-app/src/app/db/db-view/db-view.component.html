@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+        <h2 class="md-col-5">Users Collection</h2>
+        <div class="card" *ngFor="let user of users | async">
+          <div class="card-body">
+              <h5 class="card-title">{{user.payload.doc.id}}</h5>
+              {{ user.payload.doc.data() | json}}
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <h2 class="md-col-5">Customers Collection</h2>
+        <div class="card" *ngFor="let customer of customers | async">
+          <div class="card-body">
+              <h5 class="card-title">{{customer.payload.doc.id}}</h5>
+              {{ customer.payload.doc.data() | json}}
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
