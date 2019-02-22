@@ -1,9 +1,28 @@
-<div class="user-list">
-    <mat-action-list>
+<div class="search">
+    <div class="search__header">
+        <input 
+          id="search-term" 
+          type="text" 
+          placeholder="Enter phrase/title/name" 
+          (change)="searchValueChanged(searchTerm)"
+          [(ngModel)]="searchTerm"
+          />
+    </div>
+    <mat-radio-group (change)="onChangeFilter($event)">
+        <mat-radio-button value="people" checked>People</mat-radio-button>
+        <mat-radio-button value="starship">Starships</mat-radio-button>
+    </mat-radio-group> 
+
+    <div class="search__results">
+
+    </div>
+  
+  
+  <!-- <mat-action-list>
       <ng-container *ngFor="let user of users$ | async">
           <a mat-list-item [routerLink]="['/users', user.payload.doc.id]">
             {{ user.payload.doc.data().name }}
           </a>
       </ng-container>
-    </mat-action-list>
+    </mat-action-list> -->
 </div>

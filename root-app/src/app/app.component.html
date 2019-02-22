@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
     <a mat-button routerLink="/home" routerLinkActive="mat-accent"> ANG-7 app </a>
     <a mat-button routerLink="/firebase" routerLinkActive="mat-accent"> Firestore view </a>
-    <a mat-button routerLink="/users" routerLinkActive="mat-accent"> ANG/forms </a>
+    <a mat-button routerLink="/users" routerLinkActive="mat-accent"> Star Wars API </a>
     <span class="spacer"></span>
     <a *ngIf="!(auth.user | async)" mat-button routerLink="/login" routerLinkActive="mat-accent"> Login </a>
     <button *ngIf="(auth.user | async)" mat-button (click)="auth.signOut()"> Logout </button>

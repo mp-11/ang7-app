@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeaturesModule } from './features/features.module';
 import { DbModule } from './db/db.module';
 import { UsersModule } from './users/users.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UsersModule } from './users/users.module';
     BrowserAnimationsModule,
     DbModule,
     UsersModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
