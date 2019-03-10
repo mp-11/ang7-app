@@ -9,6 +9,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { StoreModule } from '@ngrx/store';
@@ -25,6 +26,7 @@ import { EffectsModule } from '@ngrx/effects';
     MatRadioModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
     MatProgressSpinnerModule,
     StoreModule.forFeature('people', reducers),
     EffectsModule.forFeature(effects)

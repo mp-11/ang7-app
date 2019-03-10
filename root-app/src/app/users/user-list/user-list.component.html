@@ -20,23 +20,23 @@
 
     <div class="search__results">
       <div class="search__results__cards" *ngIf="isLoaded$ | async">
-          <div *ngIf="!(results$| async).length;">No results </div>
-          <mat-action-list>
-              <ng-container *ngFor="let result of results$ | async">
-                  <a mat-list-item >
-                    {{ result.name }}
-                  </a>
-              </ng-container>
-          </mat-action-list>
+          
+          <div *ngIf="!(results$| async).length; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>No results </ng-template>
+          <ng-template #elseBlock>
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let result of results$ | async">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{ result.name }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div>
+                    {{ result | json }}
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+          </ng-template>
       </div>
     </div>
-  
-  
-  <!-- <mat-action-list>
-      <ng-container *ngFor="let user of users$ | async">
-          <a mat-list-item [routerLink]="['/users', user.payload.doc.id]">
-            {{ user.payload.doc.data().name }}
-          </a>
-      </ng-container>
-    </mat-action-list> -->
 </div>

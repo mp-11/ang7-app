@@ -1,4 +1,18 @@
 .search {
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+
+    &__header{
+        margin-bottom: 20px;
+    }
+    
+    mat-radio-group {
+        display: flex;
+        flex-direction: column;
+    }
+
     &__loader {
         position: absolute;
         top:50%;
@@ -7,7 +21,6 @@
     }
 
     &__results {
-        background-color: #eee;
         width: 100%;
         padding: 1em;
         position: relative;
