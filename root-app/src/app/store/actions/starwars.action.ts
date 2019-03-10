@@ -9,12 +9,12 @@ export const SEARCH_PEOPLE_SUCCESS = "[People] Search People Success";
 
 export class SearchPeople implements Action {
     readonly type = SEARCH_PEOPLE;
-    constructor(public payload: any) {}
+    constructor(public payload?: any) {}
 }
 
 export class SearchPeopleFail implements Action {
     readonly type = SEARCH_PEOPLE_FAIL;
-    constructor(public payload: any) {}
+    constructor(public payload?: any) {}
 }
 
 export class SearchPeopleSuccess implements Action {

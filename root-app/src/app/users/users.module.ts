@@ -8,10 +8,12 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from '../store';
+import { reducers, effects } from '../store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [UsersComponent, UserInfoComponent, UserListComponent],
@@ -23,7 +25,9 @@ import { reducers } from '../store';
     MatRadioModule,
     MatFormFieldModule,
     MatInputModule,
-    StoreModule.forFeature('people', reducers)
+    MatProgressSpinnerModule,
+    StoreModule.forFeature('people', reducers),
+    EffectsModule.forFeature(effects)
   ]
 })
 export class UsersModule { }

@@ -27,13 +27,15 @@ export function reducer(state = initialState, action: fromStarWars.StarWarsActio
         return {
             ...state,
             loading: false,
-            loaded: true
+            loaded: true,
+            data: action.payload
         };
     }
 
     case fromStarWars.SEARCH_PEOPLE_FAIL: {
         return {
             ...state,
+            data: [],   
             loading: false,
             loaded: false
         };

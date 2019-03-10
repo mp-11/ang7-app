@@ -1,4 +1,4 @@
-import * as fromStarWars from './starwars';
+import * as fromStarWars from './starwars.reducer';
 import { ActionReducerMap, createSelector, createFeatureSelector } from '@ngrx/store';
  
 export interface State {

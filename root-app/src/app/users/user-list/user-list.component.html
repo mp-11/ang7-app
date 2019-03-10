@@ -1,4 +1,8 @@
 <div class="search">
+    <div *ngIf="loading$ | async" class="search__loader">
+        <mat-progress-spinner mode="indeterminate" ></mat-progress-spinner>
+    </div>
+
     <div class="search__header">
         <input 
           id="search-term" 
@@ -8,13 +12,23 @@
           [(ngModel)]="searchTerm"
           />
     </div>
+    
     <mat-radio-group (change)="onChangeFilter($event)">
         <mat-radio-button value="people" checked>People</mat-radio-button>
-        <mat-radio-button value="starship">Starships</mat-radio-button>
+        <mat-radio-button value="starships">Starships</mat-radio-button>
     </mat-radio-group> 
 
     <div class="search__results">
-
+      <div class="search__results__cards" *ngIf="isLoaded$ | async">
+          <div *ngIf="!(results$| async).length;">No results </div>
+          <mat-action-list>
+              <ng-container *ngFor="let result of results$ | async">
+                  <a mat-list-item >
+                    {{ result.name }}
+                  </a>
+              </ng-container>
+          </mat-action-list>
+      </div>
     </div>
   
   

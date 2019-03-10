@@ -13,6 +13,8 @@ import { FeaturesModule } from './features/features.module';
 import { DbModule } from './db/db.module';
 import { UsersModule } from './users/users.module';
 import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { StoreModule } from '@ngrx/store';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FeaturesModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -28,7 +31,8 @@ import { StoreModule } from '@ngrx/store';
     DbModule,
     UsersModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
