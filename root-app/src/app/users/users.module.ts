@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users/users.component';
 import { UserInfoComponent } from './user-info/user-info.component';
@@ -28,6 +28,7 @@ import { EffectsModule } from '@ngrx/effects';
     MatInputModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    ReactiveFormsModule,
     StoreModule.forFeature('people', reducers),
     EffectsModule.forFeature(effects)
   ]

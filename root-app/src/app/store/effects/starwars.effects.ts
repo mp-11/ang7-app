@@ -16,13 +16,22 @@ export class StarWarsEffects {
         .pipe(
             ofType(starWarsActions.SEARCH_PEOPLE),
             switchMap((action: starWarsActions.SearchPeople) => {
-                const type = action.payload.type;
-                const searcTerm = action.payload.searchTerm;
-
-                return this.StarwarsService.getData(type, searcTerm).pipe(
-                    map(res => new starWarsActions.SearchPeopleSuccess(res.results)),
+                return this.StarwarsService.getPeople(action.payload.searchTerm).pipe(
+                    map(({ results: people }) => new starWarsActions.SearchPeopleSuccess(people)),
                     catchError(error => of(new starWarsActions.SearchPeopleFail(error)))
                 )
             })
-        )
+        );
+
+    @Effect()
+    loadFilms$ = this.actions$
+        .pipe(
+            ofType(starWarsActions.LOAD_FILMS),
+            switchMap((action: starWarsActions.SearchPeople) => {
+                return this.StarwarsService.loadFilms().pipe(
+                    map(({ results: films }) => new starWarsActions.LoadFilmsSuccess(films)),
+                    catchError(error => of(new starWarsActions.LoadFilmsFail(error)))
+                )
+            })
+        );
 }

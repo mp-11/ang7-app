@@ -3,20 +3,29 @@
         <mat-progress-spinner mode="indeterminate" ></mat-progress-spinner>
     </div>
 
-    <div class="search__header">
-        <input 
-          id="search-term" 
-          type="text" 
-          placeholder="Enter phrase/title/name" 
-          (change)="searchValueChanged(searchTerm)"
-          [(ngModel)]="searchTerm"
-          />
-    </div>
+    <div class="filters">
+        <div class="search__header">
+            <label for="search-term">Name </label>
+            <input class="form-control" 
+              id="search-term" 
+              type="text" 
+              (change)="searchValueChanged(searchTerm)"
+              [(ngModel)]="searchTerm"
+              />
+        </div>
     
-    <mat-radio-group (change)="onChangeFilter($event)">
-        <mat-radio-button value="people" checked>People</mat-radio-button>
-        <mat-radio-button value="starships">Starships</mat-radio-button>
-    </mat-radio-group> 
+        <form [formGroup]="filterForm">
+            <div class="form-group">
+              <label for="films">Film</label>
+              <select id="films" formControlName="film" class="form-control">
+                <option [ngValue]="''"></option>
+                <option *ngFor="let film of films$ | async" [ngValue]="film">
+                  {{ film.title }}
+                </option>
+              </select>
+            </div>
+        </form>
+    </div>
 
     <div class="search__results">
       <div class="search__results__cards" *ngIf="isLoaded$ | async">

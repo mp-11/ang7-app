@@ -3,8 +3,9 @@ import { Subject, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromStore from './../../store';
 import { Person } from './../../models/person';
-import { StarwarsService } from '../services/starwars.service';
 import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Film } from 'src/app/models/film';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-user-list',
@@ -12,27 +13,40 @@ import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./user-list.component.less']
 })
 export class UserListComponent implements OnInit {
-  searching$: Subject<any>;
+  filterForm: FormGroup;
+  searching$: Subject<any> = new Subject();
   searchingSubsriber$: any;
   
   searchTerm: string = '';
   filterType: string = 'people';
-  loading$: any;
-  isLoaded$: any;
+  loading$: Observable<boolean>;
+  isLoaded$: Observable<boolean>;
+  films$: Observable<Film[]>;
   results$: Observable<Person[]>;
   
-  constructor(private store: Store<fromStore.State>, private StarwarsService: StarwarsService) {
-    this.searching$ = new Subject();
-  }
+  constructor(private store: Store<fromStore.State>, private fb: FormBuilder) { }
   
   ngOnInit() {
+    this.loading$ = this.store.select(fromStore.getPeopleLoading);
+    this.isLoaded$ = this.store.select(fromStore.getPeopleLoaded);
+    this.films$ = this.store.select(fromStore.getFilms);
+    this.buildFilterForm();
+
     this.filterSubscribtion();
+    this.store.dispatch(new fromStore.LoadFilms())
+    
+    this.results$ = this.store.select(fromStore.getFilteredPeople);
+  }
 
-    this.loading$ = this.store.select<any>(fromStore.getPeopleLoading);
-    this.isLoaded$ = this.store.select<any>(fromStore.getPeopleLoaded);
-    this.results$ = this.store.select<any>(fromStore.getAllPeople);
+  buildFilterForm() {
+    this.filterForm = this.fb.group({
+      'film': ''
+    });
 
-    this.StarwarsService.init();
+    this.filterForm.controls['film'].valueChanges.subscribe(value => {
+      let filmFilter = value === '' ? value : value.url;
+      this.store.dispatch(new fromStore.UpdateFilters({ film: filmFilter }));
+    });
   }
 
   searchValueChanged(searchTerm) {

@@ -23,6 +23,28 @@ export const getPeopleState = createSelector(
     fromStarWars.getPerson
  )
 
+ export const getFilters = createSelector(
+      getPeopleState,
+      fromStarWars.getFilters
+ )
+
+ export const getFilteredPeople = createSelector(
+    getAllPeople,
+    getFilters,
+    (people, filters) => {
+       console.log(people, filters);
+       
+       return !filters.film 
+         ? people
+         : people.filter(person => person.films.includes(filters.film));
+    }
+ ) 
+
+ export const getFilms = createSelector(
+    getPeopleState,
+    fromStarWars.getFilms
+ )
+
  export const getPeopleLoaded = createSelector(
     getPeopleState,
     fromStarWars.getPersonLoaded
